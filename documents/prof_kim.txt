@@ -1,0 +1,14 @@
+Professor Kim
+Course: CS106 - Machine Learning Intro
+
+Students describe Professor Kim as enthusiastic and passionate about machine learning.
+
+Projects involve real datasets and practical applications.
+
+Several reviews mention that Python experience is helpful before taking the course.
+
+Exams are considered fair and closely aligned with lectures.
+
+Students enjoy the hands-on projects more than the quizzes.
+
+Many students recommend the course for those interested in AI careers.

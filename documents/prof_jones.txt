@@ -1,0 +1,14 @@
+Professor Jones
+Course: CS102 - Data Structures
+
+Students frequently describe Professor Jones as knowledgeable but demanding.
+
+The most common complaint is that exams are difficult and require a deep understanding of data structures rather than memorization.
+
+Homework assignments are long and often take multiple days to complete.
+
+Several students mention that grading is strict.
+
+Students who attend office hours regularly tend to perform much better than those who do not.
+
+Many reviews suggest that the course is rewarding but requires significant effort.

@@ -1,0 +1,14 @@
+Professor Smith
+Course: CS101 - Introduction to Programming
+
+Students generally describe Professor Smith as beginner-friendly and approachable. Lectures move at a slower pace than most CS courses.
+
+Several students mention that attendance helps because many exam questions are similar to examples shown during class.
+
+Homework assignments are not especially difficult but can take longer for students who have never programmed before.
+
+Office hours are popular and often crowded before exams.
+
+Many reviews mention that Professor Smith gives detailed feedback on projects and coding assignments.
+
+Students recommend this course for beginners who want a supportive introduction to programming.

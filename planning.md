@@ -1,122 +1,105 @@
 # Project 1 Planning: The Unofficial Guide
 
-> Write this document before you write any pipeline code.
-> Your spec and architecture diagram are what you'll use to direct AI tools (Claude, Copilot, etc.) to generate your implementation — the more specific they are, the more useful the generated code will be.
-> Update the Retrieval Approach and Chunking Strategy sections if you change your approach during implementation.
-> Update this file before starting any stretch features.
-
----
-
 ## Domain
 
-<!-- What domain did you choose? Why is this knowledge valuable and hard to find through official channels? -->
+Student-generated professor reviews for undergraduate computer science courses.
+
+Official course catalogs provide course descriptions and instructor names, but they do not contain student opinions about teaching style, workload, exam difficulty, feedback quality, or overall course experience. This system makes professor reviews searchable and answerable through natural language questions.
 
 ---
 
 ## Documents
 
-<!-- List your specific sources: URLs, subreddit names, forum threads, or file descriptions.
-     Aim for at least 10 sources that together cover different subtopics or perspectives within your domain. -->
+1. prof_smith.txt
+2. prof_jones.txt
+3. prof_lee.txt
+4. prof_chen.txt
+5. prof_kim.txt
+6. prof_patel.txt
+7. prof_davis.txt
+8. prof_wilson.txt
+9. prof_martinez.txt
+10. prof_garcia.txt
 
-| # | Source | Description | URL or location |
-|---|--------|-------------|-----------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
-| 6 | | | |
-| 7 | | | |
-| 8 | | | |
-| 9 | | | |
-| 10 | | | |
+Each document contains simulated student review text for a computer science professor and course.
 
 ---
 
 ## Chunking Strategy
 
-<!-- How will you split documents into chunks?
-     State your chunk size (in tokens or characters), overlap size, and explain why those
-     numbers fit the structure of your documents.
-     A review-heavy corpus warrants different chunking than a long FAQ. -->
+**Chunk size:** 300 characters
 
-**Chunk size:**
-
-**Overlap:**
+**Overlap:** 50 characters
 
 **Reasoning:**
+
+Professor review documents are relatively short and opinion-based. Smaller chunks help keep each chunk focused on a specific student opinion, making retrieval more precise. A 50-character overlap helps preserve context when information spans multiple chunks.
 
 ---
 
 ## Retrieval Approach
 
-<!-- Which embedding model are you using (e.g., all-MiniLM-L6-v2 via sentence-transformers)?
-     How many chunks will you retrieve per query (top-k)?
-     If you were deploying this for real users and cost wasn't a constraint, what tradeoffs
-     would you weigh in choosing a different embedding model — context length, multilingual
-     support, accuracy on domain-specific text, latency? -->
+**Embedding model:** all-MiniLM-L6-v2 using sentence-transformers
 
-**Embedding model:**
-
-**Top-k:**
+**Top-k:** 4 chunks per query
 
 **Production tradeoff reflection:**
+
+For a production system, I would evaluate larger embedding models that may provide higher retrieval accuracy, longer context handling, multilingual support, and better performance on informal student language. I would balance those benefits against increased cost, latency, and infrastructure requirements.
 
 ---
 
 ## Evaluation Plan
 
-<!-- List your 5 test questions with their expected correct answers.
-     Questions should be specific enough that you can judge whether the system's response
-     is right or wrong. "What are good dining halls?" is too vague.
-     "What do students say about wait times at [dining hall name] during lunch?" is testable. -->
-
-| # | Question | Expected answer |
-|---|----------|-----------------|
-| 1 | | |
-| 2 | | |
-| 3 | | |
-| 4 | | |
-| 5 | | |
+| # | Question                                                | Expected answer                                                                                                |
+| - | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| 1 | Which professor is considered most beginner friendly?   | Professor Smith                                                                                                |
+| 2 | Which professor has the heaviest workload?              | Professor Chen                                                                                                 |
+| 3 | Which professor emphasizes practical database skills?   | Professor Patel                                                                                                |
+| 4 | Which professor is known for detailed project feedback? | Professor Wilson                                                                                               |
+| 5 | What do students think about Professor Garcia?          | Mixed opinions with conflicting reviews; possible retrieval issues because some reviews refer to Garcia as "G" |
 
 ---
 
 ## Anticipated Challenges
 
-<!-- What could go wrong? Name at least two specific risks with reasoning.
-     Consider: noisy or inconsistent documents, missing source attribution, off-topic
-     retrieval, chunks that split key information across boundaries. -->
+1. Important information may be split across chunk boundaries, causing retrieval to miss part of an answer.
 
-1.
+2. Semantic retrieval may return reviews discussing similar topics but the wrong professor.
 
-2.
+3. Source attribution could fail if metadata is not stored correctly during ingestion.
+
+4. The Garcia document contains conflicting opinions and a nickname ("G"), which may create retrieval or generation errors.
 
 ---
 
 ## Architecture
 
-<!-- Draw a diagram of your pipeline showing the five stages:
-     Document Ingestion → Chunking → Embedding + Vector Store → Retrieval → Generation
-     Label each stage with the tool or library you're using.
-     You can use ASCII art, a Mermaid diagram, or embed a sketch as an image.
-     You'll use this diagram as context when prompting AI tools to implement each stage. -->
+```mermaid
+flowchart TD
+    A[Document Ingestion<br/>Text Files] --> B[Chunking<br/>300 Characters<br/>50 Character Overlap]
+    B --> C[Embeddings<br/>all-MiniLM-L6-v2]
+    C --> D[Vector Store<br/>ChromaDB]
+    D --> E[Retrieval<br/>Top 4 Chunks]
+    E --> F[Generation<br/>Groq Llama 3.3]
+    F --> G[Grounded Answer<br/>with Sources]
+```
 
 ---
 
 ## AI Tool Plan
 
-<!-- For each part of the pipeline below, describe:
-     - Which AI tool you plan to use (Claude, Copilot, ChatGPT, etc.)
-     - What you'll give it as input (which sections of this planning.md, which requirements)
-     - What you expect it to produce
-     - How you'll verify the output matches your spec
+**Milestone 3 — Ingestion and Chunking**
 
-     "I'll use AI to help me code" is not a plan.
-     "I'll give Claude my Chunking Strategy section and ask it to implement chunk_text()
-     with my specified chunk size and overlap" is a plan. -->
+I will use ChatGPT to help generate Python code that loads text files from the documents folder, cleans whitespace, and chunks documents according to my specified chunk size and overlap. I will verify the output by inspecting sample chunks and confirming that each chunk contains meaningful review information and correct source metadata.
 
-**Milestone 3 — Ingestion and chunking:**
+**Milestone 4 — Embedding and Retrieval**
 
-**Milestone 4 — Embedding and retrieval:**
+I will use ChatGPT to help implement embeddings using all-MiniLM-L6-v2 and store chunk embeddings in ChromaDB. I will verify retrieval quality by running evaluation questions and checking whether the returned chunks are relevant to the query.
 
-**Milestone 5 — Generation and interface:**
+**Milestone 5 — Generation and Interface**
+
+I will use ChatGPT to help connect retrieval to Groq's Llama model and build a Gradio interface. I will verify grounding by ensuring answers come only from retrieved documents and that out-of-scope questions return an appropriate response indicating insufficient information.
+
+```
+```

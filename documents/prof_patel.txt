@@ -1,0 +1,14 @@
+Professor Patel
+Course: CS107 - Databases
+
+Students often mention that Professor Patel emphasizes practical skills.
+
+Projects involve designing databases and writing SQL queries.
+
+Several reviews mention that the course feels useful for internships and industry jobs.
+
+Exams are generally considered easier than the projects.
+
+Students appreciate the real-world examples used during lectures.
+
+Many reviewers recommend taking this course before applying for software engineering internships.
